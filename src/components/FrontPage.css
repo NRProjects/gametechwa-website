@@ -1,0 +1,53 @@
+.front-page-container {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+    /* background-color: darkcyan; */
+    padding: 20px;
+}
+
+.navbar-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: large;
+    gap: 100px;
+    width: 80%;
+}
+
+.navbar-items a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar-item {
+    font-size: small;
+
+}
+
+.front-page-title {
+    font-size: x-large;
+}
+
+.user-buttons {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    gap: 50px;
+    justify-content: center;
+    font-size: small;
+}
+
+.user-buttons a {
+    text-decoration: none;
+    color: inherit;
+}

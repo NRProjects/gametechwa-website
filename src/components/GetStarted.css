@@ -1,0 +1,62 @@
+.get-started-container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+}
+
+.get-started-text {
+    align-self: flex-start;
+    line-height: 3rem;
+    margin-bottom: 1rem;
+}
+
+.get-started-form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.get-started-form-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+
+    margin-bottom: 1rem;
+}
+
+.get-started-form-row-item {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 0.5rem;
+}
+
+
+.get-started-form-row input {
+    background-color: gray;
+    padding: 1rem;
+}
+
+.get-started-form-submit {
+    align-self: center;
+    margin: auto;
+}
+
+.get-started-form-submit button {
+    
+    
+    padding: 1rem;
+    background-color: darkgoldenrod;
+    color: white;
+    /* font-size: ; */
+    font-weight: 600;
+}
+
+
+
+
+
