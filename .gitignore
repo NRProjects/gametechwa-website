@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+backend/server.js
+.gitignore
+backend/routes/AuthRoute.js
+backend/*
