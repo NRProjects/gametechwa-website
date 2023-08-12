@@ -32,7 +32,7 @@ function GetStarted() {
                 <p>3) Email or call for any questions you may have</p>
             </div>
 
-            <form className='get-started-form' id='getStartedForm' onSubmit={handleSubmit}>
+            <form className='get-started-form' id='getStartedForm' onSubmit={handleSubmit} action='/submit' method='post'>
                 <div className='get-started-form-row'>
                     <div className='get-started-form-row-item'>
                         <label htmlFor='name'>Full Name</label>
