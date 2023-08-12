@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './GetStarted.css'
 
 function GetStarted() {
+    const backendURL = 'https://backend.gametechwa.com';
+
     const [formData, setFormData] = useState({
         name: '',
         address: '',
@@ -17,9 +19,24 @@ function GetStarted() {
         }));
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Form Data:', formData);
+        console.log(formData);
+
+        try {
+            let response = await fetch(`${backendURL}/submit`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            let result = await response.text();
+            console.log(result);
+        } catch (error) {
+            console.log('Error:', error);
+        }
     };
 
 
@@ -32,7 +49,7 @@ function GetStarted() {
                 <p>3) Email or call for any questions you may have</p>
             </div>
 
-            <form className='get-started-form' id='getStartedForm' onSubmit={handleSubmit} action='/submit' method='post'>
+            <form className='get-started-form' id='getStartedForm' onSubmit={handleSubmit}>
                 <div className='get-started-form-row'>
                     <div className='get-started-form-row-item'>
                         <label htmlFor='name'>Full Name</label>
