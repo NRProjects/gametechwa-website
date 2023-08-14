@@ -1,9 +1,32 @@
 import React, { useState } from 'react';
+import { Icon } from '@iconify/react';
 import './GetStarted.css'
+const BACKEND_URL = 'https://backend.gametechwa.com';
+const PHONE_REGEX = /^\d{0,3}[\- ]?[ ]*[\(]?\d{3}[\)]?[\- ]?[ ]*\d{3}[\- ]?[ ]*\d{4}$/;
+const EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/;
+
+function validateAddress(address) {
+    return address.trim() !== '';
+}
+
+function Popup({ message, isSuccess, closePopup, isVisible }) {
+    return (
+        <div className={`get-started-popup ${isVisible ? 'active' : ''} ${isSuccess ? 'success' : 'error'}`}>
+            <div className='get-started-popup-box'>
+                <div className='get-started-popup-icon-container'>
+                    <Icon className='get-started-popup-icon' icon={isSuccess ? "carbon:checkmark" : "bx:error"} color="white" width="70" />
+                </div>
+                <span className='get-started-popup-text'>{message}</span>
+                <button className='get-started-popup-button' onClick={closePopup}>CLOSE</button>
+            </div>
+        </div>
+    );
+}
 
 function GetStarted() {
-    const backendURL = 'https://backend.gametechwa.com';
-
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [isSuccess, setIsSuccess] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         address: '',
@@ -21,10 +44,24 @@ function GetStarted() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formData);
+
+        const validations = [
+            { check: !formData.name, message: 'Please fill out the name' },
+            { check: !validateAddress(formData.address), message: 'Please enter a valid address' },
+            { check: !PHONE_REGEX.test(formData.phoneNumber), message: 'Please enter a valid phone number' },
+            { check: !EMAIL_REGEX.test(formData.email), message: 'Please enter a valid email' }
+        ];
+
+        for (const validation of validations) {
+            if (validation.check) {
+                setPopupMessage(validation.message);
+                setShowPopup(true);
+                return;
+            }
+        }
 
         try {
-            let response = await fetch(`${backendURL}/submit`, {
+            let response = await fetch(`${BACKEND_URL}/submit`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
@@ -33,15 +70,47 @@ function GetStarted() {
             });
 
             let result = await response.text();
-            console.log(result);
+
+            if (response.ok) {
+                setPopupMessage('Success! We will be in touch shortly.');
+                setIsSuccess(true);
+            } else {
+                setPopupMessage(`Error: ${result}`);
+                setIsSuccess(false);
+            }
+            setShowPopup(true);
         } catch (error) {
             console.log('Error:', error);
+            setPopupMessage(`Error: ${error}`);
+            setIsSuccess(false);
+            setShowPopup(true);
         }
     };
+
+    const closePopup = () => {
+        setShowPopup(false);
+        
+        setTimeout(() => {
+            setIsSuccess(false);
+        }, 500);
+    };
+
+    const formFields = [
+        [
+            { id: 'name', label: 'Full Name', type: 'text', name: 'name', value: formData.name },
+            { id: 'address', label: 'Address', type: 'text', name: 'address', value: formData.address }
+        ],
+        [
+            { id: 'phoneNumber', label: 'Phone Number', type: 'text', name: 'phoneNumber', value: formData.phoneNumber },
+            { id: 'email', label: 'Email', type: 'email', name: 'email', value: formData.email }
+        ]
+    ];
 
 
     return (
         <div className='get-started-container'>
+            <Popup message={popupMessage} isSuccess={isSuccess} closePopup={closePopup} isVisible={showPopup} />
+            
             <div className='get-started-text'>
                 <h1>Steps to Becoming a Client</h1>
                 <p>1) Fill out the form below </p>
@@ -50,31 +119,16 @@ function GetStarted() {
             </div>
 
             <form className='get-started-form' id='getStartedForm' onSubmit={handleSubmit}>
-                <div className='get-started-form-row'>
-                    <div className='get-started-form-row-item'>
-                        <label htmlFor='name'>Full Name</label>
-                        <input type='text' id='name' name='name' value={formData.name} onChange={handleInputChange}/>
+                {formFields.map((row, rowIndex) => (
+                    <div className='get-started-form-row' key={rowIndex}>
+                        {row.map(field => (
+                            <div className='get-started-form-row-item' key={field.id}>
+                                <label htmlFor={field.id}>{field.label}</label>
+                                <input type={field.type} id={field.id} name={field.name} value={field.value} onChange={handleInputChange} />
+                            </div>
+                        ))}
                     </div>
-
-                    <div className='get-started-form-row-item'>
-                        <label htmlFor='address'>Address</label>
-                        <input type='text' id='address' name='address' value={formData.address} onChange={handleInputChange}/>
-                    </div>
-                </div>
-
-
-                <div className='get-started-form-row'>
-                    <div className='get-started-form-row-item'>
-                        <label htmlFor='phoneNumber'>Phone Number</label>
-                        <input type='text' id='phoneNumber' name='phoneNumber' value={formData.phoneNumber} onChange={handleInputChange}/>
-                    </div>
-
-                    <div className='get-started-form-row-item'>
-                        <label htmlFor='email'>Email</label>
-                        <input type='text' id='email' name='email' value={formData.email} onChange={handleInputChange}/>
-                    </div>
-                </div>
-
+                ))}
                 <div className='get-started-form-submit'>
                     <button type='submit'>SUBMIT</button>
                 </div>
