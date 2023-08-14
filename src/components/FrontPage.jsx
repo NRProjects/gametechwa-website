@@ -23,11 +23,11 @@ function FrontPage() {
                 </div>
 
                 <div className={`navbar-list ${isMobileNavVisible ? 'active' : ''}`}>
-                    <a href='#'>Services</a>
-                    <a href='#'>Pricing</a>
-                    <a href='#'>About Us</a>
-                    <a href='#'>Updates</a>
-                    <a href='#'>Contact Us</a>
+                    <a className='navbar-list-item' href='#'>Services</a>
+                    <a className='navbar-list-item' href='#'>Pricing</a>
+                    <a className='navbar-list-item' href='#'>About Us</a>
+                    <a className='navbar-list-item' href='#'>Updates</a>
+                    <a className='navbar-list-item' href='#'>Contact Us</a>
                     <Link className='user-button' to='login'>Login</Link>
                     <Link className='user-button' to='get-started'>Get Started</Link>
                     

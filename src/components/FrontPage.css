@@ -24,10 +24,11 @@
 }
 
 .navbar-list {
-    align-items: center;
+    /* align-items: flex-start;
+    justify-content: flex-end; */
 }
 
-.navbar-list a, .navbar-list .user-button {
+.navbar-list-item, .navbar-list, .user-button {
     font-size: large;
     font-weight: 600;
     color: inherit;
@@ -57,10 +58,10 @@
     .navbar-list {
         display: none;
         flex-direction: column;
+        align-items: flex-end;
         position: absolute;
         top: 100%;
         left: 0;
-        /* background-color: darkorange; */
         width: 100%;
     }
 
@@ -79,7 +80,7 @@
         display: flex;
     }
 
-    .navbar-list a, .navbar-list .user-button {
+    .navbar-list-item, .navbar-list, .user-button {
         margin: 10px;
     }
 
