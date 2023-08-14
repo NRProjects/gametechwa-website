@@ -1,53 +1,90 @@
 .front-page-container {
     display: flex;
     justify-content: center;
-    
 }
 
 .navbar {
     display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-    font-weight: bold;
-    /* background-color: darkcyan; */
-    padding: 20px;
-}
-
-.navbar-items {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: large;
-    gap: 100px;
+    padding: 10px;
     width: 80%;
-}
-
-.navbar-items a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.navbar-item {
-    font-size: small;
-
-}
-
-.front-page-title {
-    font-size: x-large;
-}
-
-.user-buttons {
-    display: flex;
     align-items: center;
-    width: 20%;
-    gap: 50px;
-    justify-content: center;
-    font-size: small;
+    position: relative;
 }
 
-.user-buttons a {
-    text-decoration: none;
+.navbar-logo {
+    margin-right: auto;
+    justify-content: center;
+}
+
+.logo {
+    display: flex;
+    color: white;
+    width: 100%;
+    height: 40px;
+}
+
+.navbar-list {
+    align-items: center;
+}
+
+.navbar-list a, .navbar-list .user-button {
+    font-size: large;
+    font-weight: 600;
     color: inherit;
+    text-decoration: none;
+    margin-left: 50px;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.bar {
+    justify-content: flex-end;
+    margin: auto;
+    background-color: inherit;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        display: flex;
+        padding: 10px;
+        width: 100%;
+        align-items: center;
+        position: relative;
+    }
+
+    .navbar-list {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        /* background-color: darkorange; */
+        width: 100%;
+    }
+
+    .navbar-logo {
+        display: flex;
+        margin-right: auto;
+        justify-content: flex-start;
+    }
+
+    .logo {
+        fill: inherit;
+        width: 60%;
+    }
+
+    .navbar-list.active {
+        display: flex;
+    }
+
+    .navbar-list a, .navbar-list .user-button {
+        margin: 10px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+    
 }

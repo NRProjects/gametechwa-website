@@ -1,36 +1,39 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './FrontPage.css'
+import { ReactComponent as Logo } from '../assets/templogo.svg';
+import { Icon } from '@iconify/react';
+import './FrontPage.css';
 
 function FrontPage() {
+    const [isMobileNavVisible, setIsMobileNavVisible] = useState(false);
+
+    const toggleMobileNav = () => {
+        setIsMobileNavVisible(!isMobileNavVisible);
+    };
+
     return (
-        <>
-            <div className='front-page-container'>
-                <div className='navbar'>
-                    <div className='navbar-items'>
-                        <div className='navbar-item'>
-                            <a className='front-page-title'>Gametech</a>
-                        </div>
-                        <a className='navbar-item' href='#'>Services</a>
-                        <a className='navbar-item' href='#'>Pricing</a>
-                        <a className='navbar-item' href='#'>About Us</a>
-                        <a className='navbar-item' href='#'>Updates</a>
-                        <a className='navbar-item' href='#'>Contact Us</a>
-                        
-                    </div>
-                    <div className='user-buttons'>
-                        {/* <a className='user-button' href='#'>Login</a> */}
-                        <Link className='user-button' to='login'>Login</Link>
-                        <Link className='user-button' to='get-started'>Get Started</Link>
-                        
-                        {/* <a className='user-button' href='#'>Get Started</a> */}
-                    </div>
+        <div className='front-page-container'>
+            <div className='navbar'>
+                <div className="navbar-logo">
+                    <Logo className='logo'/>
+                </div>
+                
+                <div className='menu-toggle' onClick={toggleMobileNav}>
+                    <Icon icon="mdi:hamburger-menu" color="white" height="40" />
                 </div>
 
-                <div className='footer'>
-                   
+                <div className={`navbar-list ${isMobileNavVisible ? 'active' : ''}`}>
+                    <a href='#'>Services</a>
+                    <a href='#'>Pricing</a>
+                    <a href='#'>About Us</a>
+                    <a href='#'>Updates</a>
+                    <a href='#'>Contact Us</a>
+                    <Link className='user-button' to='login'>Login</Link>
+                    <Link className='user-button' to='get-started'>Get Started</Link>
+                    
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
