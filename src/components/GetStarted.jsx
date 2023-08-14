@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import './GetStarted.css'
 const BACKEND_URL = 'https://backend.gametechwa.com';
-const PHONE_REGEX = /^\d{0,3}[\- ]?[ ]*[\(]?\d{3}[\)]?[\- ]?[ ]*\d{3}[\- ]?[ ]*\d{4}$/;
+const PHONE_REGEX = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
 const EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/;
 
 function validateAddress(address) {
