@@ -1,4 +1,9 @@
 .login-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
 .login-box-container {
@@ -9,6 +14,7 @@
 }
 
 .login-box-label {
+    font-weight: bold;
     padding: 10px 10px 10px 0px;
 
 }
