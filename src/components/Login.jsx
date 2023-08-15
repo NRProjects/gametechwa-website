@@ -20,7 +20,7 @@ function Login() {
         <div className='login-page-container' onSubmit={handleLogin}>
             <form className='login-box-container'>
                 <label className='login-box-label'>
-                    Username
+                    Email
                 </label>
                 <input className='login-box-input' value={username} onChange={(e) => setUsername(e.target.value)}/>
 
