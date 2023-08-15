@@ -1,0 +1,29 @@
+.login-page-container {
+}
+
+.login-box-container {
+    display: flex;
+    flex-direction: column;
+    background-color: darkcyan;
+    padding: 10px;
+}
+
+.login-box-label {
+    padding: 10px 10px 10px 0px;
+
+}
+
+.login-box-input {
+    padding: 10px;
+    background-color: gray;
+}
+
+.login-box-button {
+    font-size: small;
+    font-weight: bold;
+    padding: 10px;
+    margin-top: 10px;
+    color: white;
+    background-color: darkorange;
+    border-radius: 40px;
+}
