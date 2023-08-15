@@ -98,7 +98,9 @@ function GetStarted() {
     const formFields = [
         [
             { id: 'name', label: 'Full Name', type: 'text', name: 'name', value: formData.name },
-            { id: 'address', label: 'Address', type: 'text', name: 'address', value: formData.address },
+            { id: 'address', label: 'Address', type: 'text', name: 'address', value: formData.address }
+        ],
+        [
             { id: 'phoneNumber', label: 'Phone Number', type: 'text', name: 'phoneNumber', value: formData.phoneNumber },
             { id: 'email', label: 'Email', type: 'email', name: 'email', value: formData.email }
         ]
