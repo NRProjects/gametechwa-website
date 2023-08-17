@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import './GetStarted.css'
 const BACKEND_URL = 'https://backend.gametechwa.com';
-const PHONE_REGEX = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
 const EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/;
+const PHONE_REGEX = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
 
 function validateAddress(address) {
     return address.trim() !== '';
@@ -30,8 +30,10 @@ function GetStarted() {
     const [formData, setFormData] = useState({
         name: '',
         address: '',
-        phoneNumber: '',
-        email: ''
+        email: '',
+        password: '',
+        businessName: '',
+        phoneNumber: ''
     });
 
     const handleInputChange = (event) => {
@@ -48,8 +50,10 @@ function GetStarted() {
         const validations = [
             { check: !formData.name, message: 'Please fill out the name' },
             { check: !validateAddress(formData.address), message: 'Please enter a valid address' },
-            { check: !PHONE_REGEX.test(formData.phoneNumber), message: 'Please enter a valid phone number' },
-            { check: !EMAIL_REGEX.test(formData.email), message: 'Please enter a valid email' }
+            { check: !formData.businessName, message: 'Please fill out the business name' },
+            { check: !PHONE_REGEX.test(formData.phoneNumber), message: 'Please enter a valid phone number'},
+            { check: !EMAIL_REGEX.test(formData.email), message: 'Please enter a valid email' },
+            { check: !formData.password, message: 'Please enter a password' }
         ];
 
         for (const validation of validations) {
@@ -61,7 +65,7 @@ function GetStarted() {
         }
 
         try {
-            let response = await fetch(`${BACKEND_URL}/submit`, {
+            let response = await fetch(`${BACKEND_URL}/get-started-submit`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
@@ -69,13 +73,13 @@ function GetStarted() {
                 body: JSON.stringify(formData)
             });
 
-            let result = await response.text();
+            let result = await response.json();
 
             if (response.ok) {
                 setPopupMessage('Success! We will be in touch shortly.');
                 setIsSuccess(true);
             } else {
-                setPopupMessage(`Error: ${result}`);
+                setPopupMessage(`Error: ${result.message || 'Unknown error'}`);
                 setIsSuccess(false);
             }
             setShowPopup(true);
@@ -101,8 +105,12 @@ function GetStarted() {
             { id: 'address', label: 'Address', type: 'text', name: 'address', value: formData.address }
         ],
         [
-            { id: 'phoneNumber', label: 'Phone Number', type: 'text', name: 'phoneNumber', value: formData.phoneNumber },
-            { id: 'email', label: 'Email', type: 'email', name: 'email', value: formData.email }
+            { id: 'businessName', label: 'Business Name', type: 'text', name: 'businessName', value: formData.businessName },
+            { id: 'phoneNumber', label: 'Phone Number', type: 'string', name: 'phoneNumber', value: formData.phoneNumber }
+        ],
+        [
+            { id: 'email', label: 'Email', type: 'text', name: 'email', value: formData.email },
+            { id: 'password', label: 'Password', type: 'password', name: 'password', value: formData.password }
         ]
     ];
 
@@ -130,7 +138,7 @@ function GetStarted() {
                     </div>
                 ))}
                 <div className='get-started-form-submit'>
-                    <button type='submit'>SUBMIT</button>
+                    <button type='submit'>CREATE ACCOUNT & SUBMIT</button>
                 </div>
             </form>
         </div>
