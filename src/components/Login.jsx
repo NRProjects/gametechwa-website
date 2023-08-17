@@ -3,9 +3,7 @@ import { BACKEND_URL } from './util';
 import './Login.css';
 
 function Login() {
-    // const [username, setUsername] = useState('');
-    // const [password, setPassword] = useState('');
-    const [credentials, setCredentials] = useState({ email: '', password: '' }); // [username, password]
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -65,8 +63,6 @@ function Login() {
 
                 <button type='submit' className='login-box-button'>LOGIN</button>
                 <button className='login-box-button'>FORGOT PASSWORD</button>
-
-                
             </form>
         </div>
     );
