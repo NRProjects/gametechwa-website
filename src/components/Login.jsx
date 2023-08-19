@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { BACKEND_URL } from './util';
 import './Login.css';
+import { useUser } from '../UserContext';
 
 function Login() {
+    const { setUser } = useUser();
+
     const [credentials, setCredentials] = useState({ email: '', password: '' });
 
     const handleChange = (event) => {
@@ -34,6 +37,12 @@ function Login() {
             if (!response.ok) {
                 throw new Error(data.message || 'Login failed');
             }
+
+            const userData = { email };
+
+            localStorage.setItem('user', JSON.stringify(userData));
+
+            setUser(data);
 
             alert('Login successful');
         } catch (error) {

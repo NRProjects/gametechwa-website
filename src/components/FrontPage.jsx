@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/templogo.svg';
 import { Icon } from '@iconify/react';
+import { useUser } from '../UserContext';
 import './FrontPage.css';
 
 function FrontPage() {
     const [isMobileNavVisible, setIsMobileNavVisible] = useState(false);
+    const { user } = useUser();
+    const location = useLocation();
+
+    const [lastNavigation, setLastNavigation] = useState(Date.now());
 
     const toggleMobileNav = () => {
         setIsMobileNavVisible(!isMobileNavVisible);
     };
+
+    useEffect(() => {
+        if (location !== lastNavigation) {
+            setLastNavigation(location);
+        }
+    }, [location]);
 
     return (
         <div className='front-page-container'>
@@ -30,6 +41,7 @@ function FrontPage() {
                     <a className='navbar-list-item' href='#'>Contact Us</a>
                     <Link className='user-button' to='login'>Login</Link>
                     <Link className='user-button' to='get-started'>Get Started</Link>
+                    {user && <Link className='user-button' to='admin'>{user.email}</Link>}
                     
                 </div>
             </div>
