@@ -6,11 +6,13 @@ export const useUser = () => {
     return useContext(UserContext);
 }
 
+const retrieveUser = () => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+}
+
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(() => {
-        const savedUser = localStorage.getItem('user');
-        return savedUser ? JSON.parse(savedUser) : null;
-    })
+    const [user, setUser] = useState(retrieveUser());
 
     useEffect(() => {
         const handleStorageChange = (e) => {
@@ -26,21 +28,7 @@ export const UserProvider = ({ children }) => {
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch();
-                const userData = await response.json();
-                setUser(userData);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        fetchUserData();
-    }, []);
-
+    
     return (
         <UserContext.Provider value={{ user, setUser }}>
             {children}
