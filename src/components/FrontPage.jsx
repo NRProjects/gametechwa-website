@@ -39,9 +39,9 @@ function FrontPage() {
                     <a className='navbar-list-item' href='#'>About Us</a>
                     <a className='navbar-list-item' href='#'>Updates</a>
                     <a className='navbar-list-item' href='#'>Contact Us</a>
-                    <Link className='user-button' to='login'>Login</Link>
-                    <Link className='user-button' to='get-started'>Get Started</Link>
-                    {user && <Link className='user-button' to='admin'>{user.email}</Link>}
+                    {!user && <Link className='user-button' to='login'>Login</Link>}
+                    {!user && <Link className='user-button' to='get-started'>Get Started</Link>}
+                    {user && <button className='user-button' to='admin'>{user.email}</button>}
                     
                 </div>
             </div>
