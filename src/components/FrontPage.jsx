@@ -41,7 +41,7 @@ function FrontPage() {
                     <a className='navbar-list-item' href='#'>Contact Us</a>
                     {!user && <Link className='user-button' to='login'>Login</Link>}
                     {!user && <Link className='user-button' to='get-started'>Get Started</Link>}
-                    {user && <button className='user-button' to='admin'>{user.email}</button>}
+                    {user && <button className='user-button' to='admin'>My Account</button>}
                     
                 </div>
             </div>
