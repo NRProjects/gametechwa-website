@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import './GetStarted.css'
+
 const BACKEND_URL = 'https://backend.gametechwa.com';
 const EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/;
 const PHONE_REGEX = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
@@ -24,6 +26,8 @@ function Popup({ message, isSuccess, closePopup, isVisible }) {
 }
 
 function GetStarted() {
+    const navigate = useNavigate();
+
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
@@ -96,6 +100,7 @@ function GetStarted() {
         
         setTimeout(() => {
             setIsSuccess(false);
+            navigate('/login');
         }, 500);
     };
 
@@ -113,7 +118,6 @@ function GetStarted() {
             { id: 'password', label: 'Password', type: 'password', name: 'password', value: formData.password }
         ]
     ];
-
 
     return (
         <div className='get-started-container'>
